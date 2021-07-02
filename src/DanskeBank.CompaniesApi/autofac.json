@@ -1,0 +1,10 @@
+﻿{
+  "defaultAssembly": "DanskeBank.Infrastructure",
+  "modules": [
+    {
+      "type": "DanskeBank.CompaniesApi.Module, DanskeBank.CompaniesApi",
+      "properties": {
+      }
+    }
+  ]
+}
