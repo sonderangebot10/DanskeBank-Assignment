@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{92C16180-0C32-455C-90CC-F9C7EE9AA589}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC1F568F-CE3B-4B1E-A858-E0708167FB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanskeBank.CompaniesApi", "DanskeBank.CompaniesApi\DanskeBank.CompaniesApi.csproj", "{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8} = {CC1F568F-CE3B-4B1E-A858-E0708167FB1F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0803B86D-0A13-4A51-BB5D-F096C5D9E883}
+	EndGlobalSection
+EndGlobal
