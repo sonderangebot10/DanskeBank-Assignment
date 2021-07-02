@@ -12,7 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using System;
 using System.IO;
+using System.Reflection;
 
 namespace DanskeBank.CompaniesApi
 {
@@ -35,7 +37,10 @@ namespace DanskeBank.CompaniesApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DanskeBank.CompaniesApi", Version = "v1" });
             });
 
