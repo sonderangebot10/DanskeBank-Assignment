@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 
 COPY ["src/DanskeBank.CompaniesApi/DanskeBank.CompaniesApi.csproj", "src/DanskeBank.CompaniesApi/"]
+COPY ["src/DanskeBank.Infrastructure/DanskeBank.Infrastructure.csproj", "src/DanskeBank.Infrastructure/"]
+COPY ["src/DanskeBank.Application/DanskeBank.Application.csproj", "src/DanskeBank.Application/"]
+COPY ["src/DanskeBank.Domain/DanskeBank.Domain.csproj", "src/DanskeBank.Domain/"]
 
 RUN dotnet restore "src/DanskeBank.CompaniesApi/DanskeBank.CompaniesApi.csproj"
 
