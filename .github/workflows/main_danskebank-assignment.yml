@@ -28,10 +28,10 @@ jobs:
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2.2.1
       with:
-        context: ./src/DanskeBank.CompaniesApi
+        context: .
         push: true
         tags: ${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}/danskebank-assignment:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./src/DanskeBank.CompaniesApi/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
