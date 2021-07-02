@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy container app to Azure Web App - danskebank-assignment
+name: Build and deploy
 
 on:
   push:
@@ -22,16 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: https://index.docker.io/v1/
         username: ${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}
         password: ${{ secrets.AzureAppService_ContainerPassword_4771c082f2744de9b69af75c4373af89 }}
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v2.2.1
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}/danskebank-assignment:${{ github.sha }}
-        file: ./Dockerfile
+        tags: ${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}/danskebank-assignment:${{ github.sha }}
+        file: ./src/DanskeBank.CompaniesApi/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,4 +47,4 @@ jobs:
         app-name: 'danskebank-assignment'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_e9ee48eb58e046f48557b37eaf71fe19 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}/danskebank-assignment:${{ github.sha }}'
+        images: '${{ secrets.AzureAppService_ContainerUsername_fd0b8f6e0a544447ad7320cda1f8f32d }}/danskebank-assignment:${{ github.sha }}'
