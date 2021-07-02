@@ -4,12 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>b3f83d57-3820-4008-89c5-060b84eb30e7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileFile>..\..\Dockerfile</DockerfileFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>.\src\DanskeBank.CompaniesApi\DanskeBank.CompaniesApi.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
-    <OutputPath>C:\_repositories\DanskeBank\</OutputPath>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
