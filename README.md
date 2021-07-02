@@ -2,7 +2,7 @@
 
 DanskeBank Rest API Assignment using .Net Core 5.0
 
-![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net)
+![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/swagger/index.html)
 
 ## Table of Contents
 
