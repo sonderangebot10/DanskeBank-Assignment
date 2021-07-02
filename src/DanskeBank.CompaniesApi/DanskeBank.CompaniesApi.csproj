@@ -5,6 +5,7 @@
     <UserSecretsId>b3f83d57-3820-4008-89c5-060b84eb30e7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileFile>..\..\Dockerfile</DockerfileFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
