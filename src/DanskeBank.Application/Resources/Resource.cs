@@ -140,5 +140,11 @@ namespace DanskeBank.Application.Resources
         /// </summary>
         public static string ERR_Argument_Exception(string argument, string expectedValue)
             => $"Invalid argument '{argument}', expected to be: {expectedValue}.";
+
+        /// <summary>
+        /// Invalid argument '<paramref name="argument"/>', company not found.
+        /// </summary>
+        public static string ERR_Argument_Company_Exception(string argument)
+            => $"Invalid argument '{argument}', company not found.";
     }
 }

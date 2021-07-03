@@ -3,6 +3,8 @@ using Autofac.Configuration;
 using DanskeBank.Application.Api.Health;
 using DanskeBank.CompaniesApi.Diagnostic.Health;
 using DanskeBank.CompaniesApi.Filters;
+using DanskeBank.Infrastructure.Data.Sql.Companies;
+using DanskeBank.Infrastructure.Data.Sql.Companies.Seeds;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -71,7 +73,7 @@ namespace DanskeBank.CompaniesApi
                 options.Filters.Add(typeof(ValidateModelAttribute));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
-
+        
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new ConfigurationModule(Configuration));
@@ -129,6 +131,9 @@ namespace DanskeBank.CompaniesApi
                   name: "default",
                   pattern: "/");
             });
+
+            var companiesContext = app.ApplicationServices.GetService<Context>();
+            companiesContext.SeedData();
         }
     }
 }

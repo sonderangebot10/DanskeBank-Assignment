@@ -4,12 +4,47 @@
         <name>DanskeBank.CompaniesApi</name>
     </assembly>
     <members>
-        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.Get">
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.GetAllCompanies">
             <summary>
-            TEST
+            Returns a list of all companies
             </summary>
-            <remarks>TEST</remarks>
-            <returns>200Ok</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.GetCompany(System.String)">
+            <summary>
+            Returns a specific comapny
+            </summary>
+            <remarks></remarks>
+            <param name="companyId">Id of the company</param>
+        </member>
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.CreateCompany(DanskeBank.CompaniesApi.Api.Json.CreateCompanyModel)">
+            <summary>
+            Creates a company
+            </summary>
+            <remarks></remarks>
+            <param name="company">the company object</param>
+        </member>
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.UpdateCompany(System.String,DanskeBank.CompaniesApi.Api.Json.UpdateCompanyModel)">
+            <summary>
+            Updates a company
+            </summary>
+            <remarks></remarks>
+            <param name="company">the company object</param>
+            <param name="companyId">the company id</param>
+        </member>
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.CompaniesController.AddOwner(System.String,DanskeBank.CompaniesApi.Api.Json.OwnerModel)">
+            <summary>
+            Adds and owner to a company
+            </summary>
+            <remarks></remarks>
+            <param name="owner">the owner object</param>
+            <param name="companyId">the company id</param>
+        </member>
+        <member name="M:DanskeBank.CompaniesApi.Api.Companies.SsnController.GetAllCompanies(System.String)">
+            <summary>
+            Checks if SSN is correct
+            </summary>
+            <remarks>Correct format is '123-45-6789'</remarks>
         </member>
     </members>
 </doc>

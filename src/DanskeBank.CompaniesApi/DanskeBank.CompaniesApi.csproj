@@ -39,9 +39,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Api\Json\" />
-    <Folder Include="Api\Mapping\" />
-  </ItemGroup>
-
 </Project>

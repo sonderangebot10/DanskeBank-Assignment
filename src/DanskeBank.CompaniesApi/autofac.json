@@ -5,6 +5,20 @@
       "type": "DanskeBank.CompaniesApi.Module, DanskeBank.CompaniesApi",
       "properties": {
       }
+    },
+    {
+      "type": "DanskeBank.Infrastructure.Data.Sql.Companies.Module",
+      "properties": {
+        "DBName": "DanskeBankDB"
+      }
+    },
+    {
+      "type": "DanskeBank.Infrastructure.ApplicationModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "DanskeBank.CompaniesApi.Services.Module, DanskeBank.CompaniesApi"
     }
   ]
 }
