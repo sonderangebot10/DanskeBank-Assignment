@@ -2,7 +2,7 @@
 
 DanskeBank Rest API Assignment using .Net Core 5.0
 
-![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/swagger/index.html)
+![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/)
 
 *NOTE: Cold start might take some time to initialize for the initial request.*
 
@@ -35,7 +35,7 @@ After the container build is done, run the following command to start the server
 
 `docker run -d -p 8080:80 --name danskeapp danskeassignment`
 
-To access the API navigate to http://localhost/swagger/index.html
+To access the API navigate to http://localhost/
     
 ## cURLs
 
