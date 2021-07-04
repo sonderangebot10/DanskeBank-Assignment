@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using DanskeBank.Application.Services;
 using DanskeBank.CompaniesApi.Api.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DanskeBank.CompaniesApi.Api.Companies
 {
@@ -28,6 +29,7 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         /// </summary>
         /// <remarks>Correct format is '123-45-6789'</remarks>
         [HttpGet("{ssn}/Validate")]
+        [Authorize(Policy = "SsnService")]
         [ProducesResponseType(typeof(TopLevelDocument<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllCompanies([FromRoute] string ssn)

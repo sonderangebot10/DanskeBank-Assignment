@@ -61,7 +61,7 @@ To access the API navigate to http://localhost/
 
 *Check of social security number*
 
-`curl -X GET "https://danskebank-assignment.azurewebsites.net/api/Ssn/123-45-6789/Validate" -H  "accept: application/json"`
+`curl -X GET "https://danskebank-assignment.azurewebsites.net/api/Ssn/123-45-6789/Validate" -H  "accept: application/json" -H  "Authorization: admin"`
 
 ## Remarks 
 

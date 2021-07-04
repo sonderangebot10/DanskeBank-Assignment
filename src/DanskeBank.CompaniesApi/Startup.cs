@@ -1,10 +1,14 @@
 using Autofac;
 using Autofac.Configuration;
 using DanskeBank.Application.Api.Health;
+using DanskeBank.CompaniesApi.AuthorizationPolicies;
 using DanskeBank.CompaniesApi.Diagnostic.Health;
 using DanskeBank.CompaniesApi.Filters;
 using DanskeBank.Infrastructure.Data.Sql.Companies;
 using DanskeBank.Infrastructure.Data.Sql.Companies.Seeds;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -44,7 +49,45 @@ namespace DanskeBank.CompaniesApi
                 c.IncludeXmlComments(xmlPath);
 
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DanskeBank.CompaniesApi", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"The correct authorization password is 'admin'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
+                });
             });
+
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAuthorizationHandler, GroupsCheckHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SsnService", policy =>
+                    policy.Requirements.Add(new GroupsCheckRequirement("admin")));
+            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options))
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
 
             services.AddCors(options =>
             {
@@ -93,6 +136,7 @@ namespace DanskeBank.CompaniesApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
