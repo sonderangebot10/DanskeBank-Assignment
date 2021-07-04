@@ -15,16 +15,19 @@ namespace DanskeBank.Application.UseCases.Companies
             _companiesReadOnlyRepository = companiesReadOnlyRepository;
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<Company>> GetCompaniesAsync()
         {
             return await _companiesReadOnlyRepository.GetCompaniesAsync();
         }
 
+        /// <inheritdoc />
         public async Task<Company> GetCompanyDetailsAsync(Guid companyId)
         {
             return await _companiesReadOnlyRepository.GetCompanyDetailsAsync(companyId);
         }
 
+        /// <inheritdoc />
         public async Task<bool> CompanyExistsAsync(Guid companyId)
         {
             return await _companiesReadOnlyRepository.CompanyExistsAsync(companyId);

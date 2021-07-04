@@ -42,10 +42,11 @@ namespace DanskeBank.Domain.Companies
             Name = name;
             Country = country;
             PhoneNumber = phoneNumber;
-
         }
+
         public Company()
         {
+            Id = Guid.Empty;
             Name = string.Empty;
             Country = string.Empty;
             PhoneNumber = string.Empty;

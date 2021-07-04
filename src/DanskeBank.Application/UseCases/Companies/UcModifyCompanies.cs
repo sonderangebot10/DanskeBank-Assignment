@@ -14,16 +14,19 @@ namespace DanskeBank.Application.UseCases.Companies
             _companiesWriteOnlyRepository = companiesWriteOnlyRepository;
         }
 
+        /// <inheritdoc />
         public async Task<Company> AddOwnerAsync(Guid companyId, Owner owner)
         {
             return await _companiesWriteOnlyRepository.AddOwnerAsync(companyId, owner);
         }
 
+        /// <inheritdoc />
         public async Task<Company> CreateCompanyAsync(Company company)
         {
             return await _companiesWriteOnlyRepository.CreateCompanyAsync(company);
         }
 
+        /// <inheritdoc />
         public async Task<Company> UpdateCompanyAsync(Company company)
         {
             return await _companiesWriteOnlyRepository.UpdateCompanyAsync(company);
