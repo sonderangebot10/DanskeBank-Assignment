@@ -13,7 +13,9 @@ namespace DanskeBank.CompaniesApi.AuthorizationPolicies
         {
             _httpContextAccessor = httpContextAccessor;
         }
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context,
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                                                   GroupsCheckRequirement requirement)
         {
             var headers = _httpContextAccessor.HttpContext.Request.Headers;

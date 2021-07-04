@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using DanskeBank.Application.Services;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
@@ -11,11 +12,15 @@ namespace DanskeBank.CompaniesApi.Diagnostic.Health
         private readonly ILogger _logger;
         private readonly StartupHostedServiceHealthCheck _startupHostedServiceHealthCheck;
 
+        private readonly ISsnService _ssnService;
+
         public Readiness(ILogger<Readiness> logger,
-            StartupHostedServiceHealthCheck startupHostedServiceHealthCheck)
+            StartupHostedServiceHealthCheck startupHostedServiceHealthCheck,
+            ISsnService ssnService)
         {
             _logger = logger;
             _startupHostedServiceHealthCheck = startupHostedServiceHealthCheck;
+            _ssnService = ssnService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -26,6 +31,13 @@ namespace DanskeBank.CompaniesApi.Diagnostic.Health
             Task.Run(async () =>
             {
                 // CHECK IF ALL THE SERVICES ARE RUNNING OK
+
+                // bad example, but OK
+                if (!await _ssnService.CheckSSNAsync("123-45-6789"))
+                {
+                    _logger.LogCritical("ssnService");
+                    return;
+                }
 
                 _startupHostedServiceHealthCheck.StartupTaskCompleted = true;
 
