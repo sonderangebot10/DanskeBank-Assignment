@@ -1,5 +1,6 @@
 ﻿
 using DanskeBank.Domain.Companies;
+using System;
 using System.Threading.Tasks;
 
 namespace DanskeBank.Application.Repositories
@@ -8,6 +9,6 @@ namespace DanskeBank.Application.Repositories
     {
         Task<Company> CreateCompanyAsync(Company company);
         Task<Company> UpdateCompanyAsync(Company company);
-        Task<Company> AddOwnerAsync(string companyId, Owner owner);
+        Task<Company> AddOwnerAsync(Guid companyId, Owner owner);
     }
 }

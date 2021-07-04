@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace DanskeBank.Domain.Companies
 {
     public class Company : IEntity
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
@@ -15,18 +16,18 @@ namespace DanskeBank.Domain.Companies
         private readonly List<Owner> _owners;
 
         public Company(string name, string country, string phoneNumber)
-            : this(null, name, country, phoneNumber, null)
+            : this(Guid.Empty, name, country, phoneNumber, null)
         {
 
         }
 
-        public Company(string id, string name, string country, string phoneNumber) 
+        public Company(Guid id, string name, string country, string phoneNumber) 
             : this(id, name, country, phoneNumber, null)
         {
 
         }
 
-        public Company(string id, string name, string country, string phoneNumber, List<Owner> owners)
+        public Company(Guid id, string name, string country, string phoneNumber, List<Owner> owners)
         {
             if (owners == null)
             {

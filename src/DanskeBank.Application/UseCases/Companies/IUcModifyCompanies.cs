@@ -1,4 +1,5 @@
 ﻿using DanskeBank.Domain.Companies;
+using System;
 using System.Threading.Tasks;
 
 namespace DanskeBank.Application.UseCases.Companies
@@ -16,6 +17,6 @@ namespace DanskeBank.Application.UseCases.Companies
         /// <summary>
         /// adds an owner to a company async
         /// </summary>
-        Task<Company> AddOwnerAsync(string companyId, Owner owner);
+        Task<Company> AddOwnerAsync(Guid companyId, Owner owner);
     }
 }

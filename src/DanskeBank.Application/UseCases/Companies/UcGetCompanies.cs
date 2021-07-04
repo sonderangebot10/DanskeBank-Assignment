@@ -1,5 +1,6 @@
 ﻿using DanskeBank.Application.Repositories;
 using DanskeBank.Domain.Companies;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,12 +20,12 @@ namespace DanskeBank.Application.UseCases.Companies
             return await _companiesReadOnlyRepository.GetCompaniesAsync();
         }
 
-        public async Task<Company> GetCompanyDetailsAsync(string companyId)
+        public async Task<Company> GetCompanyDetailsAsync(Guid companyId)
         {
             return await _companiesReadOnlyRepository.GetCompanyDetailsAsync(companyId);
         }
 
-        public async Task<bool> CompanyExistsAsync(string companyId)
+        public async Task<bool> CompanyExistsAsync(Guid companyId)
         {
             return await _companiesReadOnlyRepository.CompanyExistsAsync(companyId);
         }

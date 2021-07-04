@@ -17,7 +17,7 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
         {
             var mockCompaniesWriteOnlyRepo = new Mock<ICompaniesWriteOnlyRepository>();
 
-            var company = new Company("Google", "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
+            var company = new Company(Guid.NewGuid(), "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
 
             mockCompaniesWriteOnlyRepo.SetupSequence(e => e.CreateCompanyAsync(It.IsAny<Company>()))
                 .ReturnsAsync(company);
@@ -35,7 +35,7 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
         {
             var mockCompaniesWriteOnlyRepo = new Mock<ICompaniesWriteOnlyRepository>();
 
-            var company = new Company("Google", "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
+            var company = new Company(Guid.NewGuid(), "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
 
             mockCompaniesWriteOnlyRepo.SetupSequence(e => e.UpdateCompanyAsync(It.IsAny<Company>()))
                 .ReturnsAsync(company);
@@ -53,14 +53,14 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
         {
             var mockCompaniesWriteOnlyRepo = new Mock<ICompaniesWriteOnlyRepository>();
 
-            var company = new Company("Google", "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
+            var company = new Company(Guid.NewGuid(), "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
 
-            mockCompaniesWriteOnlyRepo.SetupSequence(e => e.AddOwnerAsync(It.IsAny<string>(), It.IsAny<Owner>()))
+            mockCompaniesWriteOnlyRepo.SetupSequence(e => e.AddOwnerAsync(It.IsAny<Guid>(), It.IsAny<Owner>()))
                 .ReturnsAsync(company);
 
             var uc = new UcModifyCompanies(mockCompaniesWriteOnlyRepo.Object);
 
-            var output = await uc.AddOwnerAsync("companyId", new Owner());
+            var output = await uc.AddOwnerAsync(Guid.NewGuid(), new Owner());
 
             Assert.Equal(company, output);
         }

@@ -1,4 +1,5 @@
 ﻿using DanskeBank.Domain.Companies;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,10 +14,10 @@ namespace DanskeBank.Application.UseCases.Companies
         /// <summary>
         /// gets details of a company async
         /// </summary>
-        Task<Company> GetCompanyDetailsAsync(string companyId);
+        Task<Company> GetCompanyDetailsAsync(Guid companyId);
         /// <summary>
         /// checks whether a company exists by given company id
         /// </summary>
-        Task<bool> CompanyExistsAsync(string companyId);
+        Task<bool> CompanyExistsAsync(Guid companyId);
     }
 }

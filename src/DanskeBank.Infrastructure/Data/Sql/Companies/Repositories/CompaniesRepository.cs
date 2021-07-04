@@ -17,7 +17,7 @@ namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Company> AddOwnerAsync(string companyId, Owner owner)
+        public async Task<Company> AddOwnerAsync(Guid companyId, Owner owner)
         {
             var entityCompany =
                 await _context.Companies.FirstOrDefaultAsync(company => company.Id.Equals(companyId));
@@ -36,7 +36,7 @@ namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
             return await GetCompanyDetailsAsync(companyId);
         }
 
-        public async Task<bool> CompanyExistsAsync(string companyId)
+        public async Task<bool> CompanyExistsAsync(Guid companyId)
         {
             var entityCompanies =
                 await _context.Companies.Where(company => company.Id.Equals(companyId)).ToListAsync();
@@ -91,7 +91,7 @@ namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
             return result;
         }
 
-        public async Task<Company> GetCompanyDetailsAsync(string companyId)
+        public async Task<Company> GetCompanyDetailsAsync(Guid companyId)
         {
             var entityCompany = 
                 await _context.Companies.FirstOrDefaultAsync(company => company.Id.Equals(companyId));

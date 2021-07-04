@@ -10,7 +10,7 @@ using DanskeBank.CompaniesApi.Api.Json;
 using System.Net;
 using DanskeBank.Application.Resources;
 using Microsoft.Extensions.Logging;
-using System.Linq;
+using System;
 
 namespace DanskeBank.CompaniesApi.Api.Companies
 {
@@ -64,7 +64,15 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetCompany([FromRoute] string companyId)
         {
-            var result = await _getCompaniesUseCase.GetCompanyDetailsAsync(companyId);
+            if (!Guid.TryParse(companyId, out var cId))
+            {
+                return BadRequest(Http_1_1.GetErr(
+                    HttpStatusCode.BadRequest,
+                    Resources.ERR_Incomplete_Request_Model(),
+                    Resources.ERR_Argument_Company_Exception(companyId)));
+            }
+
+            var result = await _getCompaniesUseCase.GetCompanyDetailsAsync(cId);
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -131,16 +139,17 @@ namespace DanskeBank.CompaniesApi.Api.Companies
                         Resources.ERR_Argument_Exception(nameof(company), "not empty")));
             }
 
-            if (!await _getCompaniesUseCase.CompanyExistsAsync(companyId))
+            if (!Guid.TryParse(companyId, out var cId) ||
+                !await _getCompaniesUseCase.CompanyExistsAsync(cId))
             {
                 return BadRequest(Http_1_1.GetErr(
                     HttpStatusCode.BadRequest,
                     Resources.ERR_Incomplete_Request_Model(),
-                    Resources.ERR_Argument_Company_Exception(nameof(companyId))));
+                    Resources.ERR_Argument_Company_Exception(companyId)));
             }
 
             var result = await _modifyCompaniesUseCase.UpdateCompanyAsync(
-                new Company(companyId, company.Name, company.Country, company.PhoneNumber));
+                new Company(cId, company.Name, company.Country, company.PhoneNumber));
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -173,15 +182,16 @@ namespace DanskeBank.CompaniesApi.Api.Companies
                         Resources.ERR_Argument_Exception(nameof(owner), "not empty")));
             }
 
-            if(!await _getCompaniesUseCase.CompanyExistsAsync(companyId))
+            if (!Guid.TryParse(companyId, out var cId) ||
+                !await _getCompaniesUseCase.CompanyExistsAsync(cId))
             {
                 return BadRequest(Http_1_1.GetErr(
                     HttpStatusCode.BadRequest,
                     Resources.ERR_Incomplete_Request_Model(),
-                    Resources.ERR_Argument_Company_Exception(nameof(companyId))));
+                    Resources.ERR_Argument_Company_Exception(companyId)));
             }
 
-            var result = await _modifyCompaniesUseCase.AddOwnerAsync(companyId,
+            var result = await _modifyCompaniesUseCase.AddOwnerAsync(cId,
                 new Owner(owner.Name, owner.SSN));
 
             var viewModelBody = result != null ? result.ToStdBody() : null;

@@ -4,6 +4,7 @@ using DanskeBank.Application.Repositories;
 using System.Collections.Generic;
 using DanskeBank.Domain.Companies;
 using DanskeBank.Application.UseCases.Companies;
+using System;
 
 namespace DanskeBank.Applications.Test.UseCases.Companies
 {
@@ -17,7 +18,7 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
 
             var companies = new List<Company>
             {
-                new Company("Google", "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") })
+                new Company(Guid.NewGuid(), "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") })
             };
 
             mockCompaniesReadOnlyRepo.SetupSequence(e => e.GetCompaniesAsync())
@@ -36,14 +37,14 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
         {
             var mockCompaniesReadOnlyRepo = new Mock<ICompaniesReadOnlyRepository>();
 
-            var company = new Company("Google", "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
+            var company = new Company(Guid.NewGuid(), "United States of America", "+12165454844651", "Lithuania", new List<Owner> { new Owner("742-22-4554", "Jeff") });
 
-            mockCompaniesReadOnlyRepo.SetupSequence(e => e.GetCompanyDetailsAsync(It.IsAny<string>()))
+            mockCompaniesReadOnlyRepo.SetupSequence(e => e.GetCompanyDetailsAsync(It.IsAny<Guid>()))
                 .ReturnsAsync(company);
 
             var uc = new UcGetCompanies(mockCompaniesReadOnlyRepo.Object);
 
-            var output = await uc.GetCompanyDetailsAsync("test");
+            var output = await uc.GetCompanyDetailsAsync(Guid.NewGuid());
 
             Assert.Equal(company, output);
         }
@@ -54,12 +55,12 @@ namespace DanskeBank.Applications.Test.UseCases.Companies
         {
             var mockCompaniesReadOnlyRepo = new Mock<ICompaniesReadOnlyRepository>();
 
-            mockCompaniesReadOnlyRepo.SetupSequence(e => e.CompanyExistsAsync(It.IsAny<string>()))
+            mockCompaniesReadOnlyRepo.SetupSequence(e => e.CompanyExistsAsync(It.IsAny<Guid>()))
                 .ReturnsAsync(true);
 
             var uc = new UcGetCompanies(mockCompaniesReadOnlyRepo.Object);
 
-            var output = await uc.CompanyExistsAsync("test");
+            var output = await uc.CompanyExistsAsync(Guid.NewGuid());
 
             Assert.True(output);
         }
