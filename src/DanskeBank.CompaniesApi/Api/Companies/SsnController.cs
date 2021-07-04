@@ -39,10 +39,10 @@ namespace DanskeBank.CompaniesApi.Api.Companies
             var viewModelBody = 
                 new SsnValidationResponseModel { Valid = result }.ToStdBody();
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = StatusCodes.Status200OK
-            });
+            };
         }
     }
 }

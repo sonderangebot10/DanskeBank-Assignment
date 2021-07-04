@@ -45,12 +45,12 @@ namespace DanskeBank.CompaniesApi.Api.Companies
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = viewModelBody != null
                     ? StatusCodes.Status200OK
                     : StatusCodes.Status204NoContent
-            });
+            };
         }
 
         /// <summary>
@@ -76,12 +76,12 @@ namespace DanskeBank.CompaniesApi.Api.Companies
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = viewModelBody != null
                     ? StatusCodes.Status200OK
                     : StatusCodes.Status204NoContent
-            });
+            };
         }
 
         /// <summary>
@@ -109,12 +109,12 @@ namespace DanskeBank.CompaniesApi.Api.Companies
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = viewModelBody != null
                     ? StatusCodes.Status200OK
                     : StatusCodes.Status204NoContent
-            });
+            };
         }
 
         /// <summary>
@@ -153,12 +153,12 @@ namespace DanskeBank.CompaniesApi.Api.Companies
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = viewModelBody != null
                     ? StatusCodes.Status200OK
                     : StatusCodes.Status204NoContent
-            });
+            };
         }
 
         /// <summary>
@@ -196,12 +196,12 @@ namespace DanskeBank.CompaniesApi.Api.Companies
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
-            return await Task.FromResult(new ObjectResult(viewModelBody)
+            return new ObjectResult(viewModelBody)
             {
                 StatusCode = viewModelBody != null
                     ? StatusCodes.Status200OK
                     : StatusCodes.Status204NoContent
-            });
+            };
         }
     }
 }
