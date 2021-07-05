@@ -2,7 +2,7 @@
 
 DanskeBank Rest API Assignment using .Net Core 5.0
 
-![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO SWAGGER OF HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/)
+![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO SWAGGER OF HOSTED WEB APP](https://danskebank-task.azurewebsites.net/)
 
 *NOTE: Cold start might take some time to initialize for the initial request.*
 
@@ -41,27 +41,27 @@ To access the swagger of the API navigate to http://localhost:8080/
 
 *Create a new company*
 
-`curl -X POST "https://danskebank-assignment.azurewebsites.net/api/Companies" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"country\":\"string\",\"phoneNumber\":\"string\"}"`
+`curl -X POST "https://danskebank-task.azurewebsites.net/api/Companies" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"country\":\"string\",\"phoneNumber\":\"string\"}"`
 
 *Get a list of all companies*
 
-`curl -X GET "https://danskebank-assignment.azurewebsites.net/api/Companies/GetAll" -H  "accept: application/json"`
+`curl -X GET "https://danskebank-task.azurewebsites.net/api/Companies/GetAll" -H  "accept: application/json"`
 
 *Get details about a company*
 
-`curl -X GET "https://danskebank-assignment.azurewebsites.net/api/Companies/{companyId}" -H  "accept: application/json"`
+`curl -X GET "https://danskebank-task.azurewebsites.net/api/Companies/{companyId}" -H  "accept: application/json"`
 
 *Update a company*
 
-`curl -X PATCH "https://danskebank-assignment.azurewebsites.net/api/Companies/{companyId}" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"country\":\"string\",\"phoneNumber\":\"string\"}"`
+`curl -X PATCH "https://danskebank-task.azurewebsites.net/api/Companies/{companyId}" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"country\":\"string\",\"phoneNumber\":\"string\"}"`
 
 *Add an owner of the company*
 
-`curl -X POST "https://danskebank-assignment.azurewebsites.net/api/Companies/{companyId}/AddOwner" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"ssn\":\"string\"}"`
+`curl -X POST "https://danskebank-task.azurewebsites.net/api/Companies/{companyId}/AddOwner" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"name\":\"string\",\"ssn\":\"string\"}"`
 
 *Check of social security number*
 
-`curl -X GET "https://danskebank-assignment.azurewebsites.net/api/Ssn/123-45-6789/Validate" -H  "accept: application/json" -H  "Authorization: admin"`
+`curl -X GET "https://danskebank-task.azurewebsites.net/api/Ssn/123-45-6789/Validate" -H  "accept: application/json" -H  "Authorization: admin"`
 
 ## Remarks 
 
