@@ -29,7 +29,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.AzureAppService_ContainerUsername_020e8a702aea40be86229d91fbd8ceb5 }}/danskebank-assignment:${{ github.sha }}
+        tags: ${{ secrets.AzureAppService_ContainerUsername_020e8a702aea40be86229d91fbd8ceb5 }}/danskebank-task:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,4 +47,4 @@ jobs:
         app-name: 'danskebank-task'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_54bf38b49d9c4fbb943579b070c424c7 }}
-        images: '${{ secrets.AzureAppService_ContainerUsername_020e8a702aea40be86229d91fbd8ceb5 }}/danskebank-assignment:${{ github.sha }}'
+        images: '${{ secrets.AzureAppService_ContainerUsername_020e8a702aea40be86229d91fbd8ceb5 }}/danskebank-task:${{ github.sha }}'
