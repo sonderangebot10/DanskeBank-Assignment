@@ -2,7 +2,7 @@
 
 DanskeBank Rest API Assignment using .Net Core 5.0
 
-![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/)
+![Azure deployment](https://github.com/sonderangebot10/DanskeBank-Assignment/actions/workflows/main_danskebank-assignment.yml/badge.svg) - [LINK TO SWAGGER OF HOSTED WEB APP](https://danskebank-assignment.azurewebsites.net/)
 
 *NOTE: Cold start might take some time to initialize for the initial request.*
 
@@ -35,7 +35,7 @@ After the container build is done, run the following command to start the server
 
 `docker run -d -p 8080:80 --name danskeapp danskeassignment`
 
-To access the API navigate to http://localhost/
+To access the swagger of the API navigate to http://localhost:8080/
     
 ## cURLs
 
@@ -70,7 +70,7 @@ What I would do if there was more time and resources for further development of 
 - more detailed error handling;
 - better CI/CD: for example, tests integration, etc.;
 - implement a real ssn validator;
-- more endpoint operations are required to fully control companies and their owenrs: for example, delete or update owners;
+- more endpoint operations are required to fully control companies and their owners: for example, delete or update owners;
 - implementation of authentication and authorization: I think in this and most cases the most advanced and versatile solution is to use OpenID protocol. It is a very widely used framework, so in terms of security, features and performance it is one of the best solutions. It would allow to fulfill the concept of access groups and would be simple to implement;
 
 Service architecture is loosely based on [Manga clean architecture template](https://github.com/ivanpaulovich/clean-architecture-manga)
