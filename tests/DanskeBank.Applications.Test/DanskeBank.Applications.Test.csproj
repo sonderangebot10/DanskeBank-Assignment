@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\DanskeBank.Application\DanskeBank.Application.csproj" />
     <ProjectReference Include="..\..\src\DanskeBank.Domain\DanskeBank.Domain.csproj" />
   </ItemGroup>
 

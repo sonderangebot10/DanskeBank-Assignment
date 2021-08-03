@@ -6,35 +6,21 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.CompaniesApi", "src\DanskeBank.CompaniesApi\DanskeBank.CompaniesApi.csproj", "{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C6E807D8-9839-4966-8742-47ED9999C3ED} = {C6E807D8-9839-4966-8742-47ED9999C3ED}
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705} = {3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Application", "src\DanskeBank.Application\DanskeBank.Application.csproj", "{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}"
-	ProjectSection(ProjectDependencies) = postProject
-		{39F300B2-C217-4790-89B4-E84354B2F57A} = {39F300B2-C217-4790-89B4-E84354B2F57A}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Domain", "src\DanskeBank.Domain\DanskeBank.Domain.csproj", "{39F300B2-C217-4790-89B4-E84354B2F57A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Infrastructure", "src\DanskeBank.Infrastructure\DanskeBank.Infrastructure.csproj", "{C6E807D8-9839-4966-8742-47ED9999C3ED}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705} = {3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3B604F29-4476-41B8-B1ED-C327A89EB940}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Applications.Test", "tests\DanskeBank.Applications.Test\DanskeBank.Applications.Test.csproj", "{E9409B0E-D291-4038-A719-F625DBE3A678}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705} = {3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Domain.Test", "tests\DanskeBank.Domain.Test\DanskeBank.Domain.Test.csproj", "{FBB51276-CF58-4927-8F54-6C80F50139B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanskeBank.Domain.Test", "tests\DanskeBank.Domain.Test\DanskeBank.Domain.Test.csproj", "{FBB51276-CF58-4927-8F54-6C80F50139B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.Infrastructure.Test", "tests\DanskeBank.Infrastructure.Test\DanskeBank.Infrastructure.Test.csproj", "{ED912BF3-86F6-46A1-8542-005EBA55D7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanskeBank.Infrastructure.Test", "tests\DanskeBank.Infrastructure.Test\DanskeBank.Infrastructure.Test.csproj", "{ED912BF3-86F6-46A1-8542-005EBA55D7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.CompaniesApi.Test", "tests\DanskeBank.CompaniesApi.Test\DanskeBank.CompaniesApi.Test.csproj", "{8A67ACAF-ABB6-4273-8949-6BDF93C32955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanskeBank.CompaniesApi.Test", "tests\DanskeBank.CompaniesApi.Test\DanskeBank.CompaniesApi.Test.csproj", "{8A67ACAF-ABB6-4273-8949-6BDF93C32955}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanskeBank.CompaniesApi.IntegartionTest", "tests\DanskeBank.CompaniesApi.IntegartionTest\DanskeBank.CompaniesApi.IntegartionTest.csproj", "{46362398-C1C9-4A0B-8AD4-F3213AD4EF8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanskeBank.CompaniesApi.IntegartionTest", "tests\DanskeBank.CompaniesApi.IntegartionTest\DanskeBank.CompaniesApi.IntegartionTest.csproj", "{46362398-C1C9-4A0B-8AD4-F3213AD4EF8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +32,6 @@ Global
 		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C61E9B-37FE-4CC1-B469-74EAD0801BC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FA0E3DD-FE98-4113-8C97-9BC0C8B71705}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39F300B2-C217-4790-89B4-E84354B2F57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39F300B2-C217-4790-89B4-E84354B2F57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39F300B2-C217-4790-89B4-E84354B2F57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,10 +40,6 @@ Global
 		{C6E807D8-9839-4966-8742-47ED9999C3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6E807D8-9839-4966-8742-47ED9999C3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6E807D8-9839-4966-8742-47ED9999C3ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9409B0E-D291-4038-A719-F625DBE3A678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9409B0E-D291-4038-A719-F625DBE3A678}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9409B0E-D291-4038-A719-F625DBE3A678}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9409B0E-D291-4038-A719-F625DBE3A678}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FBB51276-CF58-4927-8F54-6C80F50139B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FBB51276-CF58-4927-8F54-6C80F50139B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBB51276-CF58-4927-8F54-6C80F50139B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,7 +61,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E9409B0E-D291-4038-A719-F625DBE3A678} = {3B604F29-4476-41B8-B1ED-C327A89EB940}
 		{FBB51276-CF58-4927-8F54-6C80F50139B4} = {3B604F29-4476-41B8-B1ED-C327A89EB940}
 		{ED912BF3-86F6-46A1-8542-005EBA55D7EA} = {3B604F29-4476-41B8-B1ED-C327A89EB940}
 		{8A67ACAF-ABB6-4273-8949-6BDF93C32955} = {3B604F29-4476-41B8-B1ED-C327A89EB940}

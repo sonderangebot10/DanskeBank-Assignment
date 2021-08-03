@@ -3,14 +3,14 @@ using DanskeBank.Application.Api.Models;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using DanskeBank.Application.UseCases.Companies;
 using System.Collections.Generic;
-using DanskeBank.Domain.Companies;
 using DanskeBank.CompaniesApi.Api.Json;
 using System.Net;
 using DanskeBank.Application.Resources;
 using Microsoft.Extensions.Logging;
 using System;
+using DanskeBank.Domain.CompanyAggregate;
+using DanskeBank.Domain.OwnerAggregate;
 
 namespace DanskeBank.CompaniesApi.Api.Companies
 {
@@ -19,15 +19,13 @@ namespace DanskeBank.CompaniesApi.Api.Companies
     [Produces(MediaTypeNames.Application.Json)]
     public class CompaniesController : Controller
     {
-        private readonly IUcGetCompanies _getCompaniesUseCase;
-        private readonly IUcModifyCompanies _modifyCompaniesUseCase;
+        private readonly ICompaniesRepository _companiesRepository;
 
         private readonly ILogger<CompaniesController> _logger;
 
-        public CompaniesController(IUcGetCompanies getCompaniesUseCase, IUcModifyCompanies modifyCompaniesUseCase, ILogger<CompaniesController> logger)
+        public CompaniesController(ICompaniesRepository companiesRepository, ILogger<CompaniesController> logger)
         {
-            _getCompaniesUseCase = getCompaniesUseCase;
-            _modifyCompaniesUseCase = modifyCompaniesUseCase;
+            _companiesRepository = companiesRepository;
             _logger = logger;
         }
 
@@ -41,7 +39,7 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllCompanies()
         {
-            var result = await _getCompaniesUseCase.GetCompaniesAsync();
+            var result = await _companiesRepository.GetCompaniesAsync();
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -72,7 +70,7 @@ namespace DanskeBank.CompaniesApi.Api.Companies
                     Resources.ERR_Argument_Company_Exception(companyId)));
             }
 
-            var result = await _getCompaniesUseCase.GetCompanyDetailsAsync(cId);
+            var result = await _companiesRepository.GetCompanyDetailsAsync(cId);
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -94,18 +92,10 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateCompany([FromBody] CreateCompanyModel company)
         {
-            if (string.IsNullOrEmpty(company.Name) ||
-                string.IsNullOrEmpty(company.Country) ||
-                string.IsNullOrEmpty(company.PhoneNumber))
-            {
-                return BadRequest(Http_1_1.GetErr(
-                        HttpStatusCode.BadRequest,
-                        Resources.ERR_Request_Body_Cannot_Be_Empty(),
-                        Resources.ERR_Argument_Exception(nameof(company), "not empty")));
-            }
-
-            var result = await _modifyCompaniesUseCase.CreateCompanyAsync(
+            var result = await _companiesRepository.CreateCompanyAsync(
                 new Company(company.Name, company.Country, company.PhoneNumber));
+
+            await _companiesRepository.UnitOfWork.SaveChangesAsync();
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -128,19 +118,8 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateCompany([FromRoute] string companyId, [FromBody] UpdateCompanyModel company)
         {
-            if (string.IsNullOrEmpty(companyId) || 
-                string.IsNullOrEmpty(company.Name) ||
-                string.IsNullOrEmpty(company.Country) ||
-                string.IsNullOrEmpty(company.PhoneNumber))
-            {
-                return BadRequest(Http_1_1.GetErr(
-                        HttpStatusCode.BadRequest,
-                        Resources.ERR_Request_Body_Cannot_Be_Empty(),
-                        Resources.ERR_Argument_Exception(nameof(company), "not empty")));
-            }
-
             if (!Guid.TryParse(companyId, out var cId) ||
-                !await _getCompaniesUseCase.CompanyExistsAsync(cId))
+                !await _companiesRepository.CompanyExistsAsync(cId))
             {
                 return BadRequest(Http_1_1.GetErr(
                     HttpStatusCode.BadRequest,
@@ -148,8 +127,10 @@ namespace DanskeBank.CompaniesApi.Api.Companies
                     Resources.ERR_Argument_Company_Exception(companyId)));
             }
 
-            var result = await _modifyCompaniesUseCase.UpdateCompanyAsync(
-                new Company(cId, company.Name, company.Country, company.PhoneNumber));
+            var result = await _companiesRepository.UpdateCompanyAsync(
+                new Company(company.Name, company.Country, company.PhoneNumber));
+
+            await _companiesRepository.UnitOfWork.SaveChangesAsync();
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 
@@ -172,18 +153,8 @@ namespace DanskeBank.CompaniesApi.Api.Companies
         [ProducesResponseType(typeof(TopLevelError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddOwner([FromRoute] string companyId, [FromBody] OwnerModel owner)
         {
-            if (string.IsNullOrEmpty(companyId) ||
-                string.IsNullOrEmpty(owner.Name) ||
-                string.IsNullOrEmpty(owner.SSN))
-            {
-                return BadRequest(Http_1_1.GetErr(
-                        HttpStatusCode.BadRequest,
-                        Resources.ERR_Request_Body_Cannot_Be_Empty(),
-                        Resources.ERR_Argument_Exception(nameof(owner), "not empty")));
-            }
-
             if (!Guid.TryParse(companyId, out var cId) ||
-                !await _getCompaniesUseCase.CompanyExistsAsync(cId))
+                !await _companiesRepository.CompanyExistsAsync(cId))
             {
                 return BadRequest(Http_1_1.GetErr(
                     HttpStatusCode.BadRequest,
@@ -191,8 +162,10 @@ namespace DanskeBank.CompaniesApi.Api.Companies
                     Resources.ERR_Argument_Company_Exception(companyId)));
             }
 
-            var result = await _modifyCompaniesUseCase.AddOwnerAsync(cId,
+            var result = await _companiesRepository.AddOwnerAsync(cId,
                 new Owner(owner.Name, owner.SSN));
+
+            await _companiesRepository.UnitOfWork.SaveChangesAsync();
 
             var viewModelBody = result != null ? result.ToStdBody() : null;
 

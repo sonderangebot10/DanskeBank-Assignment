@@ -73,4 +73,4 @@ What I would do if there was more time and resources for further development of 
 - more endpoint operations are required to fully control companies and their owners: for example, delete or update owners;
 - implementation of authentication and authorization: I think in this and most cases the most advanced and versatile solution is to use OpenID protocol. It is a very widely used framework, so in terms of security, features and performance it is one of the best solutions. It would allow to fulfill the concept of access groups and would be simple to implement;
 
-Service architecture is loosely based on [Manga clean architecture template](https://github.com/ivanpaulovich/clean-architecture-manga)
+Service architecture is loosely based on [Microsoft clean architecture template](https://github.com/dotnet-architecture/eShopOnContainers)

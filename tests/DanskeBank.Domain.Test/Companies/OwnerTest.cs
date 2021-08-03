@@ -1,4 +1,4 @@
-﻿using DanskeBank.Domain.Companies;
+﻿using DanskeBank.Domain.OwnerAggregate;
 using Xunit;
 
 namespace DanskeBank.Domain.Test.Companies

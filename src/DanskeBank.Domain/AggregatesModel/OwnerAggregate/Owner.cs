@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DanskeBank.Domain.SeedWork;
+using System;
 
-namespace DanskeBank.Domain.Companies
+namespace DanskeBank.Domain.OwnerAggregate
 {
-    public class Owner : IEntity
+    public class Owner : Entity, IAggregateRoot
     {
         public Owner(string name, string ssn)
         {

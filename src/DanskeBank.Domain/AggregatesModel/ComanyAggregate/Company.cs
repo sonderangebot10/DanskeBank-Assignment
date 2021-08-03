@@ -1,33 +1,27 @@
-﻿
-using System;
+﻿using DanskeBank.Domain.OwnerAggregate;
+using DanskeBank.Domain.SeedWork;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace DanskeBank.Domain.Companies
+namespace DanskeBank.Domain.CompanyAggregate
 {
-    public class Company : IEntity
+    public class Company : Entity, IAggregateRoot
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
-        public IReadOnlyCollection<Owner> Owners => _owners.ToList();
+
+        // Should ideally just return _owners, but for easier testing...
+        public List<Owner> Owners { get; set; }
 
         private readonly List<Owner> _owners;
 
-        public Company(string name, string country, string phoneNumber)
-            : this(Guid.Empty, name, country, phoneNumber, null)
+        public Company(string name, string country, string phoneNumber) 
+            : this(name, country, phoneNumber, new List<Owner>())
         {
 
         }
 
-        public Company(Guid id, string name, string country, string phoneNumber) 
-            : this(id, name, country, phoneNumber, null)
-        {
-
-        }
-
-        public Company(Guid id, string name, string country, string phoneNumber, List<Owner> owners)
+        public Company(string name, string country, string phoneNumber, List<Owner> owners)
         {
             if (owners == null)
             {
@@ -38,7 +32,6 @@ namespace DanskeBank.Domain.Companies
                 _owners = owners;
             }
 
-            Id = id;
             Name = name;
             Country = country;
             PhoneNumber = phoneNumber;
@@ -46,7 +39,6 @@ namespace DanskeBank.Domain.Companies
 
         public Company()
         {
-            Id = Guid.Empty;
             Name = string.Empty;
             Country = string.Empty;
             PhoneNumber = string.Empty;

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace DanskeBank.CompaniesApi.Api.Json
 {
@@ -6,8 +7,10 @@ namespace DanskeBank.CompaniesApi.Api.Json
     public class OwnerModel
     {
         [JsonProperty]
+        [Required(ErrorMessage = "Required")]
         public string Name { get; set; }
-        [JsonProperty]
+        [JsonProperty, JsonRequired]
+        [Required(ErrorMessage = "Required")]
         public string SSN { get; set; }
     }
 }

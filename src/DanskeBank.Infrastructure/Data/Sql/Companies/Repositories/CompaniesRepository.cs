@@ -1,5 +1,6 @@
-﻿using DanskeBank.Application.Repositories;
-using DanskeBank.Domain.Companies;
+﻿using DanskeBank.Domain.CompanyAggregate;
+using DanskeBank.Domain.OwnerAggregate;
+using DanskeBank.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
 {
-    public class CompaniesRepository : ICompaniesReadOnlyRepository, ICompaniesWriteOnlyRepository
+    public class CompaniesRepository : ICompaniesRepository
     {
         private readonly Context _context;
 
@@ -17,98 +18,71 @@ namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return _context;
+            }
+        }
+
         public async Task<Company> AddOwnerAsync(Guid companyId, Owner owner)
         {
-            var entityCompany =
+            var newCompany =
                 await _context.Companies.FirstOrDefaultAsync(company => company.Id.Equals(companyId));
 
-            var entityOwner =
-                new Entities.Owner
+            var newOwner =
+                new Owner
                 {
                     Name = owner.Name,
                     SSN = owner.SSN
                 };
 
-            entityCompany.Owners.Add(entityOwner);
-
-            await _context.SaveChangesAsync();
+            if(newOwner.IsTransient())
+            {
+                newCompany.AddOwner(newOwner);
+            }
 
             return await GetCompanyDetailsAsync(companyId);
         }
 
         public async Task<bool> CompanyExistsAsync(Guid companyId)
         {
-            var entityCompanies =
+            var companies =
                 await _context.Companies.Where(company => company.Id.Equals(companyId)).ToListAsync();
 
-            var result = entityCompanies.Count > 0 ? true : false;
+            var result = companies.Count > 0 ? true : false;
 
             return result;
         }
 
         public async Task<Company> CreateCompanyAsync(Company company)
         {
-            var entityCompany =
-                new Entities.Company
+            var newCompany =
+                new Company
                 {
                     Name = company.Name,
                     Country = company.Country,
-                    PhoneNumber = company.PhoneNumber,
-                    Owners = new List<Entities.Owner>()
+                    PhoneNumber = company.PhoneNumber
                 };
 
-            await _context.Companies.AddAsync(entityCompany);
+            await _context.Companies.AddAsync(newCompany);
 
-            await _context.SaveChangesAsync();
-
-            return await GetCompanyDetailsAsync(entityCompany.Id);
+            return await GetCompanyDetailsAsync(newCompany.Id);
         }
 
         public async Task<IEnumerable<Company>> GetCompaniesAsync()
         {
-            var entityCompanies = await _context.Companies.ToListAsync();
-
-            var result = new List<Company>();
-            foreach(var entityCompany in entityCompanies)
-            {
-                var owners = new List<Owner>();
-                foreach (var entityOwner in entityCompany.Owners)
-                {
-                    var owner = new Owner(entityOwner.Name, entityOwner.SSN);
-                    owners.Add(owner);
-                }
-
-                var company = new Company(
-                    entityCompany.Id,
-                    entityCompany.Name,
-                    entityCompany.Country,
-                    entityCompany.PhoneNumber,
-                    owners);
-
-                result.Add(company);
-            }
+            var result = await _context.Companies.ToListAsync();
 
             return result;
         }
 
         public async Task<Company> GetCompanyDetailsAsync(Guid companyId)
         {
-            var entityCompany = 
+            var result = 
                 await _context.Companies.FirstOrDefaultAsync(company => company.Id.Equals(companyId));
-
-            if(entityCompany == null)
-            {
-                return null;
-            }
-
-            var owners = new List<Owner>();
-            foreach (var entityOwner in entityCompany.Owners)
-            {
-                var owner = new Owner(entityOwner.Name, entityOwner.SSN);
-                owners.Add(owner);
-            }
-
-            var result = new Company(entityCompany.Id, entityCompany.Name, entityCompany.Country, entityCompany.PhoneNumber, owners);
+            
             return result;
         }
 
@@ -120,8 +94,6 @@ namespace DanskeBank.Infrastructure.Data.Sql.Companies.Repositories
             entityCompany.Name = company.Name;
             entityCompany.PhoneNumber = company.PhoneNumber;
             entityCompany.Country = company.Country;
-
-            await _context.SaveChangesAsync();
 
             return await GetCompanyDetailsAsync(company.Id);
         }

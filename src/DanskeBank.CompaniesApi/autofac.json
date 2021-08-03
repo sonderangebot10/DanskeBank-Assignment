@@ -13,11 +13,6 @@
       }
     },
     {
-      "type": "DanskeBank.Infrastructure.ApplicationModule",
-      "properties": {
-      }
-    },
-    {
       "type": "DanskeBank.CompaniesApi.Services.Module, DanskeBank.CompaniesApi"
     }
   ]

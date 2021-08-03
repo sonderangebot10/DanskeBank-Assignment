@@ -33,12 +33,13 @@ namespace DanskeBank.Application.Api.Models
             };
         }
 
-        internal TopLevelError(IEnumerable<Error> errors)
+        public TopLevelError(IEnumerable<Error> errors)
             : this(errors, null)
         {
+
         }
 
-        internal TopLevelError(IEnumerable<Error> errors, object meta)
+        public TopLevelError(IEnumerable<Error> errors, object meta)
         {
             Errors = errors.ToArray();
             Meta = meta;
